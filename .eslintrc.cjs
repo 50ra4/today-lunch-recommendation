@@ -1,3 +1,4 @@
+/** @type {import('eslint').ESLint.ConfigData} */
 module.exports = {
   env: {
     browser: true,
@@ -8,9 +9,11 @@ module.exports = {
     'next/core-web-vitals',
     'plugin:import/errors',
     'plugin:promise/recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:@next/next/recommended',
     'plugin:tailwindcss/recommended',
+    'plugin:react/recommended',
+    'plugin:react-hooks/recommended',
+    'plugin:@next/next/recommended',
+    'plugin:@typescript-eslint/recommended',
     'prettier',
   ],
   plugins: ['@typescript-eslint'],
@@ -35,6 +38,8 @@ module.exports = {
     },
   },
   rules: {
+    'react/react-in-jsx-scope': 'off',
+    'react-hooks/exhaustive-deps': 'error',
     '@typescript-eslint/explicit-function-return-type': 'off',
     'import/order': [
       'error',
