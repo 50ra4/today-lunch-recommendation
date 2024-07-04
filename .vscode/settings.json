@@ -5,8 +5,8 @@
   // prettier
   "editor.formatOnSave": true,
   // eslint
-  "eslint.useESLintClass": true,
-  "eslint.useFlatConfig": true,
+  "eslint.useFlatConfig": false,
+  "eslint.validate": ["html", "javascript", "javascriptreact", "typescript", "typescriptreact"],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
