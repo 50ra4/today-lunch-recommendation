@@ -10,6 +10,7 @@ module.exports = {
     'plugin:promise/recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:@next/next/recommended',
+    'plugin:tailwindcss/recommended',
     'prettier',
   ],
   plugins: ['@typescript-eslint'],
