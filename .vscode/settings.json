@@ -5,6 +5,8 @@
   // prettier
   "editor.formatOnSave": true,
   // eslint
+  "eslint.useESLintClass": true,
+  "eslint.useFlatConfig": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
