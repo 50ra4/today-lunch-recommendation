@@ -8,6 +8,10 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
+  // tailwind css
+  "editor.quickSuggestions": {
+    "strings": true
+  },
   // default formatter setting is prettier
   "editor.defaultFormatter": "esbenp.prettier-vscode"
 }
