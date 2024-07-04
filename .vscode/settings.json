@@ -1,0 +1,19 @@
+{
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "editor.insertSpaces": true,
+  "editor.tabSize": 2,
+  // prettier
+  "editor.formatOnSave": true,
+  // eslint
+  "eslint.useESLintClass": true,
+  "eslint.useFlatConfig": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  // tailwind css
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  // default formatter setting is prettier
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
+}
