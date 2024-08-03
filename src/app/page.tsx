@@ -1,11 +1,10 @@
-import { Providers } from '@/app/providers';
+import { Header } from '@/components/Header';
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function Home() {
   return (
-    <html lang="jp">
-      <body>
-        <Providers>{children}</Providers>
-      </body>
-    </html>
+    <>
+      <Header title="ランチ君" />
+      <main className="flex min-h-screen flex-col items-center justify-between p-24"></main>
+    </>
   );
 }
