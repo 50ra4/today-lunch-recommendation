@@ -12,16 +12,18 @@ import {
 
 import { Header } from '@/components/Header';
 import { HistoryCard } from '@/components/HistoryCard';
+import { PreferenceModal } from '@/components/PreferenceModal';
 import { HISTORIES } from '@/histories.mock';
 
 export default function Home() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const drawer = useDisclosure();
+  const modal = useDisclosure();
 
   return (
     <>
-      <Header title="ランチ君" onClickHistory={isOpen ? onClose : onOpen} />
+      <Header title="ランチ君" onClickHistory={drawer.onOpen} onClickPreference={modal.onOpen} />
       <main className="flex min-h-screen flex-col items-center justify-between p-24">
-        <Drawer onClose={onClose} isOpen={isOpen} size="md" placement="left">
+        <Drawer onClose={drawer.onClose} isOpen={drawer.isOpen} size="md" placement="left">
           <DrawerOverlay />
           <DrawerContent>
             <DrawerCloseButton />
@@ -33,6 +35,7 @@ export default function Home() {
             </DrawerBody>
           </DrawerContent>
         </Drawer>
+        <PreferenceModal isOpen={modal.isOpen} onClose={modal.onClose} />
       </main>
     </>
   );

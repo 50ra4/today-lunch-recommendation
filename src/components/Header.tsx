@@ -1,13 +1,14 @@
-import { TimeIcon } from '@chakra-ui/icons';
-import { Box, Flex, Container, Heading } from '@chakra-ui/react';
+import { SettingsIcon, TimeIcon } from '@chakra-ui/icons';
+import { Box, Flex, Container, Heading, IconButton } from '@chakra-ui/react';
 import NextLink from 'next/link';
 
 type Props = {
   title: string;
   onClickHistory?: () => void;
+  onClickPreference?: () => void;
 };
 
-export function Header({ title, onClickHistory }: Props) {
+export function Header({ title, onClickHistory, onClickPreference }: Props) {
   return (
     <Box px={4} bgColor="black">
       <Container maxW="container.lg">
@@ -17,9 +18,21 @@ export function Header({ title, onClickHistory }: Props) {
               {title}
             </Heading>
           </NextLink>
-          <button aria-label="履歴を表示する" onClick={onClickHistory}>
-            <TimeIcon color="white" />
-          </button>
+          <div>
+            <IconButton
+              bgColor="transparent"
+              marginRight="4"
+              aria-label="履歴を表示する"
+              onClick={onClickHistory}
+              icon={<TimeIcon color="white" />}
+            />
+            <IconButton
+              bgColor="transparent"
+              aria-label="設定を変更する"
+              onClick={onClickPreference}
+              icon={<SettingsIcon color="white" />}
+            />
+          </div>
         </Flex>
       </Container>
     </Box>
