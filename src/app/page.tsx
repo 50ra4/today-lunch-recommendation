@@ -7,13 +7,15 @@ import {
   DrawerContent,
   DrawerHeader,
   DrawerOverlay,
+  Stack,
   useDisclosure,
 } from '@chakra-ui/react';
 
 import { Header } from '@/components/Header';
 import { HistoryCard } from '@/components/HistoryCard';
 import { PreferenceModal } from '@/components/PreferenceModal';
-import { HISTORIES } from '@/histories.mock';
+import { RobotChatCard } from '@/components/RobotChatCard';
+import { CHATS, HISTORIES } from '@/mock';
 
 export default function Home() {
   const drawer = useDisclosure();
@@ -22,7 +24,12 @@ export default function Home() {
   return (
     <>
       <Header title="ランチ君" onClickHistory={drawer.onOpen} onClickPreference={modal.onOpen} />
-      <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <main className="min-h-screen ">
+        <Stack margin="8" spacing="4">
+          {CHATS.map(({ id, question }) => (
+            <RobotChatCard key={id} question={question} />
+          ))}
+        </Stack>
         <Drawer onClose={drawer.onClose} isOpen={drawer.isOpen} size="md" placement="left">
           <DrawerOverlay />
           <DrawerContent>
