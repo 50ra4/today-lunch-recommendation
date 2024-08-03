@@ -1,3 +1,5 @@
+import type { Chat } from '@/app/chat';
+
 export const HISTORIES = [
   {
     id: '1',
@@ -16,25 +18,25 @@ export const HISTORIES = [
   },
 ];
 
-export const CHATS = [
+export const CHATS: Chat[] = [
   {
     id: '1',
-    answer: 'robot',
+    type: 'robotQuestion',
     question: '今日のおすすめのランチは...',
   },
   {
     id: '2',
-    answer: 'user',
-    question: '答えは...',
+    type: 'userAnswer',
+    answer: '答えは...',
   },
   {
     id: '3',
-    answer: 'robot',
+    type: 'robotQuestion',
     question: '今日のおすすめのランチは...',
   },
   {
     id: '4',
-    answer: 'user',
-    question: '答えは...',
+    type: 'userAnswer',
+    answer: '答えは...',
   },
 ];
