@@ -21,22 +21,62 @@ export const HISTORIES = [
 export const CHATS: Chat[] = [
   {
     id: '1',
-    type: 'robotQuestion',
-    question: '今日のおすすめのランチは...',
+    type: 'RobotQuestion',
+    question: 'あなたのランチにピッタリなお店を紹介します。',
   },
   {
     id: '2',
-    type: 'userAnswer',
-    answer: '答えは...',
+    type: 'RobotQuestion',
+    question: 'ゆっくりご飯を食べる時間はありますか？',
   },
   {
     id: '3',
-    type: 'robotQuestion',
-    question: '今日のおすすめのランチは...',
+    type: 'UserEatingSpeed',
+    value: '',
   },
   {
     id: '4',
-    type: 'userAnswer',
-    answer: '答えは...',
+    type: 'RobotQuestion',
+    question: 'お連れ様の人数は？',
+  },
+  {
+    id: '5',
+    type: 'UserHowManyPeopleAnswer',
+    value: '',
+  },
+  {
+    id: '6',
+    type: 'RobotQuestion',
+    question: 'お腹は空いていますか？',
+  },
+  {
+    id: '7',
+    type: 'UserHealthMeatAnswer',
+    value: '',
+  },
+  {
+    id: '8',
+    type: 'RobotQuestion',
+    question: 'おしゃれなお店がいいですか？',
+  },
+  {
+    id: '9',
+    type: 'UserNiceRestaurantAnswer',
+    value: '',
+  },
+  {
+    id: '10',
+    type: 'RobotQuestion',
+    question: '今日の食べたいものを教えてください。',
+  },
+  {
+    id: '11',
+    type: 'UserFreeTextAnswer',
+    value: '',
+  },
+  {
+    id: '12',
+    type: 'RobotQuestion',
+    question: '以下の内容で検索します。よろしいでしょうか？',
   },
 ];
