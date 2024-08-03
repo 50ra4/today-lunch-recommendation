@@ -34,7 +34,7 @@ export function PreferenceModal({ isOpen, onClose }: Props) {
             <Input ref={initialRef} placeholder="https://docs.google.com/spreadsheets/d/xxxxxxxxx" />
           </FormControl>
 
-          <FormControl>
+          <FormControl mt={4}>
             <FormLabel>API endpoint</FormLabel>
             <Input placeholder="https://api.openai.com/v1/chat/completions" />
           </FormControl>
