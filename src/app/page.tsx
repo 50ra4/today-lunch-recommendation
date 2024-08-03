@@ -17,7 +17,7 @@ export default function Home() {
       <Header title="ランチ君" onClickHistory={drawer.onOpen} onClickPreference={modal.onOpen} />
       <main className="min-h-screen ">
         <ChatList chats={CHATS} />
-        <SideMenu isOpen={modal.isOpen} onClose={modal.onClose} />
+        <SideMenu isOpen={drawer.isOpen} onClose={drawer.onClose} />
         <PreferenceModal isOpen={modal.isOpen} onClose={modal.onClose} />
       </main>
     </>
