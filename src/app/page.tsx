@@ -19,7 +19,7 @@ export default function Home() {
     <>
       <Header title="ランチ君" onClickHistory={isOpen ? onClose : onOpen} />
       <main className="flex min-h-screen flex-col items-center justify-between p-24">
-        <Drawer onClose={onClose} isOpen={isOpen} size="md">
+        <Drawer onClose={onClose} isOpen={isOpen} size="md" placement="left">
           <DrawerOverlay />
           <DrawerContent>
             <DrawerCloseButton />
