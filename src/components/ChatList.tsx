@@ -19,25 +19,25 @@ export function ChatList({ chats }: Props) {
       {chats.map((chat) => {
         switch (chat.type) {
           case 'RobotQuestion': {
-            return <RobotQuestionChat className="mr-4" key={chat.id} question={chat.question} />;
+            return <RobotQuestionChat className="mr-8" key={chat.id} question={chat.question} />;
           }
           case 'UserAnswer': {
-            return <UserAnswerChat className="ml-4" key={chat.id} answer={chat.answer} />;
+            return <UserAnswerChat className="ml-8" key={chat.id} answer={chat.answer} />;
           }
           case 'UserEatingSpeed': {
-            return <UserEatingSpeedChat className="ml-4" key={chat.id} value={chat.value} />;
+            return <UserEatingSpeedChat className="ml-8" key={chat.id} value={chat.value} />;
           }
           case 'UserFreeTextAnswer': {
-            return <UserFreeTextChat className="ml-4" key={chat.id} value={chat.value} />;
+            return <UserFreeTextChat className="ml-8" key={chat.id} value={chat.value} />;
           }
           case 'UserHealthMeatAnswer': {
-            return <UserHealthMeatChat className="ml-4" key={chat.id} value={chat.value} />;
+            return <UserHealthMeatChat className="ml-8" key={chat.id} value={chat.value} />;
           }
           case 'UserHowManyPeopleAnswer': {
-            return <UserHowManyPeopleChat className="ml-4" key={chat.id} value={chat.value} />;
+            return <UserHowManyPeopleChat className="ml-8" key={chat.id} value={chat.value} />;
           }
           case 'UserNiceRestaurantAnswer': {
-            return <UserNiceRestaurantChat className="ml-4" key={chat.id} value={chat.value} />;
+            return <UserNiceRestaurantChat className="ml-8" key={chat.id} value={chat.value} />;
           }
           default:
             throw new Error(`unknown chat type!`);
