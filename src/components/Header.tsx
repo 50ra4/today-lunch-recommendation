@@ -1,11 +1,13 @@
+import { TimeIcon } from '@chakra-ui/icons';
 import { Box, Flex, Container, Heading } from '@chakra-ui/react';
 import NextLink from 'next/link';
 
 type Props = {
   title: string;
+  onClickHistory?: () => void;
 };
 
-export function Header({ title }: Props) {
+export function Header({ title, onClickHistory }: Props) {
   return (
     <Box px={4} bgColor="black">
       <Container maxW="container.lg">
@@ -15,6 +17,9 @@ export function Header({ title }: Props) {
               {title}
             </Heading>
           </NextLink>
+          <button aria-label="履歴を表示する" onClick={onClickHistory}>
+            <TimeIcon color="white" />
+          </button>
         </Flex>
       </Container>
     </Box>
