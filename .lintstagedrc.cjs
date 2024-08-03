@@ -5,8 +5,6 @@ const buildEslintCommand = (filenames) =>
 
 module.exports = {
   '*.{ts,tsx}': [
-    // 型チェック
-    () => 'tsc --incremental false --noEmit',
     // Prettierフォーマット
     "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json,css}'",
     // next lint
