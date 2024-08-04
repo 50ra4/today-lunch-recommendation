@@ -1,6 +1,7 @@
 import { Select } from '@chakra-ui/react';
 
 import { ChatCard } from '@/components/ChatCard';
+import { HOW_MANY_PEOPLE_ITEMS } from '@/consts';
 
 type Props = {
   className?: string;
@@ -12,10 +13,11 @@ export function UserHowManyPeopleChat({ className, value }: Props) {
   return (
     <ChatCard className={className} avatar="user">
       <Select value={value} placeholder="人数を選択">
-        <option value="0">なし</option>
-        <option value="1">1人</option>
-        <option value="2">2人</option>
-        <option value="3">3人以上</option>
+        {HOW_MANY_PEOPLE_ITEMS.map(({ id, text }) => (
+          <option key={id} value={id}>
+            {text}
+          </option>
+        ))}
       </Select>
     </ChatCard>
   );

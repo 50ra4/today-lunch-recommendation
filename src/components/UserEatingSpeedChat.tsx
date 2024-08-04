@@ -1,6 +1,7 @@
 import { Radio, RadioGroup, Stack } from '@chakra-ui/react';
 
 import { ChatCard } from '@/components/ChatCard';
+import { EATING_SPEED_ITEMS } from '@/consts';
 
 type Props = {
   className?: string;
@@ -13,8 +14,11 @@ export function UserEatingSpeedChat({ className, value }: Props) {
     <ChatCard className={className} avatar="user">
       <RadioGroup value={value}>
         <Stack direction="column">
-          <Radio value="1">ゆっくり食べたい</Radio>
-          <Radio value="2">サクッと食べたい</Radio>
+          {EATING_SPEED_ITEMS.map(({ id, text }) => (
+            <Radio key={id} value={id}>
+              {text}
+            </Radio>
+          ))}
         </Stack>
       </RadioGroup>
     </ChatCard>
