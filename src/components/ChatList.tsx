@@ -16,7 +16,9 @@ type Props = {
 export function ChatList({ chats }: Props) {
   return (
     <Stack margin="8" spacing="4">
-      {chats.map((chat) => {
+      {chats.map((chat, i) => {
+        const isLast = i === chats.length;
+
         switch (chat.type) {
           case 'RobotQuestion': {
             return <RobotQuestionChat className="mr-8" key={chat.id} question={chat.question} />;
@@ -25,19 +27,19 @@ export function ChatList({ chats }: Props) {
             return <UserAnswerChat className="ml-8" key={chat.id} answer={chat.answer} />;
           }
           case 'UserEatingSpeed': {
-            return <UserEatingSpeedChat className="ml-8" key={chat.id} value={chat.value} />;
+            return <UserEatingSpeedChat className="ml-8" key={chat.id} value={chat.value} disabled={!isLast} />;
           }
           case 'UserFreeTextAnswer': {
-            return <UserFreeTextChat className="ml-8" key={chat.id} value={chat.value} />;
+            return <UserFreeTextChat className="ml-8" key={chat.id} value={chat.value} disabled={!isLast} />;
           }
           case 'UserHealthMeatAnswer': {
-            return <UserHealthMeatChat className="ml-8" key={chat.id} value={chat.value} />;
+            return <UserHealthMeatChat className="ml-8" key={chat.id} value={chat.value} disabled={!isLast} />;
           }
           case 'UserHowManyPeopleAnswer': {
-            return <UserHowManyPeopleChat className="ml-8" key={chat.id} value={chat.value} />;
+            return <UserHowManyPeopleChat className="ml-8" key={chat.id} value={chat.value} disabled={!isLast} />;
           }
           case 'UserNiceRestaurantAnswer': {
-            return <UserNiceRestaurantChat className="ml-8" key={chat.id} value={chat.value} />;
+            return <UserNiceRestaurantChat className="ml-8" key={chat.id} value={chat.value} disabled={!isLast} />;
           }
           default:
             throw new Error(`unknown chat type!`);

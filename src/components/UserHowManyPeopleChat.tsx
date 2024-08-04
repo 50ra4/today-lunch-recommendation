@@ -5,6 +5,7 @@ import { ChatCard } from '@/components/ChatCard';
 type Props = {
   className?: string;
   value: string;
+  disabled?: boolean;
 };
 
 export function UserHowManyPeopleChat({ className, value }: Props) {
