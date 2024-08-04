@@ -1,4 +1,8 @@
 import { Stack } from '@chakra-ui/react';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { nanoid } from 'nanoid';
+import { useState, useRef, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 
 import type { Chat } from '@/app/chat';
 import { RobotQuestionChat } from '@/components/RobotQuestionChat';
@@ -8,6 +12,9 @@ import { UserFreeTextChat } from '@/components/UserFreeTextChat';
 import { UserHealthMeatChat } from '@/components/UserHealthMeatChat';
 import { UserHowManyPeopleChat } from '@/components/UserHowManyPeopleChat';
 import { UserNiceRestaurantChat } from '@/components/UserNiceRestaurantChat';
+import { HEALTH_MEAT, HOW_MANY_PEOPLE, NICE_RESTAURANT, EATING_SPEED } from '@/consts';
+import type { QuestionFormInput } from '@/schemas/questionForm';
+import { questionFormSchema } from '@/schemas/questionForm';
 
 type Props = {
   chats: Chat[];
@@ -47,4 +54,48 @@ export function ChatList({ chats }: Props) {
       })}
     </Stack>
   );
+}
+
+export function ChatListWithState() {
+  const [chats, setChats] = useState<Chat[]>([]);
+
+  // TODO: あとで修正する
+  useForm<QuestionFormInput>({
+    resolver: zodResolver(questionFormSchema),
+    defaultValues: {
+      healthMeat: HEALTH_MEAT.health,
+      howManyPeople: HOW_MANY_PEOPLE.none,
+      niceRestaurant: NICE_RESTAURANT.cheep,
+      eatingSpeed: EATING_SPEED.slowly,
+      freeText: '',
+    },
+  });
+
+  const initialized = useRef(false);
+  useEffect(() => {
+    if (initialized.current) return;
+    setChats((prev) =>
+      prev.length
+        ? prev
+        : [
+            {
+              id: nanoid(),
+              type: 'RobotQuestion',
+              question: 'あなたのランチにピッタリなお店を紹介します。',
+            },
+            {
+              id: nanoid(),
+              type: 'RobotQuestion',
+              question: 'ゆっくりご飯を食べる時間はありますか？',
+            },
+            {
+              id: nanoid(),
+              type: 'UserEatingSpeed',
+              value: EATING_SPEED.slowly,
+            },
+          ],
+    );
+  }, []);
+
+  return <ChatList chats={chats} />;
 }

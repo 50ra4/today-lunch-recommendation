@@ -8,7 +8,7 @@ export const EATING_SPEED_ITEMS = [
     text: 'ゆっくり食べたい',
   },
   {
-    id: EATING_SPEED.slowly,
+    id: EATING_SPEED.speedy,
     text: 'サクッと食べたい',
   },
 ] as const;

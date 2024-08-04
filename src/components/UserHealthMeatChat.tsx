@@ -6,6 +6,7 @@ import { HEALTH_MEAT_ITEMS } from '@/consts';
 type Props = {
   className?: string;
   value: string;
+  onChange?: (value: string) => void;
   disabled?: boolean;
 };
 
