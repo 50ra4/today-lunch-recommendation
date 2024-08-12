@@ -6,7 +6,6 @@ import { ChatList } from '@/components/ChatList';
 import { Header } from '@/components/Header';
 import { PreferenceModal } from '@/components/PreferenceModal';
 import { SideMenu } from '@/components/SideMenu';
-import { CHATS } from '@/mock';
 
 function Page() {
   const drawer = useDisclosure();
@@ -15,8 +14,8 @@ function Page() {
   return (
     <>
       <Header title="ランチ君" onClickHistory={drawer.onOpen} onClickPreference={modal.onOpen} />
-      <main className="min-h-screen ">
-        <ChatList chats={CHATS} />
+      <main className="min-h-screen">
+        <ChatList />
         <SideMenu isOpen={drawer.isOpen} onClose={drawer.onClose} />
         <PreferenceModal isOpen={modal.isOpen} onClose={modal.onClose} />
       </main>

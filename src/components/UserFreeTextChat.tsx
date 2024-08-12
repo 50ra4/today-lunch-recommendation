@@ -6,6 +6,7 @@ type Props = {
   className?: string;
   value: string;
   onChange?: (value: string) => void;
+  disabled?: boolean;
 };
 
 export function UserFreeTextChat({ className, value }: Props) {
