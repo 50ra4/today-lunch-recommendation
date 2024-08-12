@@ -1,4 +1,4 @@
-import { Stack } from '@chakra-ui/react';
+import { Button, Stack } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { nanoid } from 'nanoid';
 import { useState, useRef, useEffect } from 'react';
@@ -16,47 +16,7 @@ import { HEALTH_MEAT, HOW_MANY_PEOPLE, NICE_RESTAURANT, EATING_SPEED } from '@/c
 import type { QuestionFormInput } from '@/schemas/questionForm';
 import { questionFormSchema } from '@/schemas/questionForm';
 
-type Props = {
-  chats: Chat[];
-};
-
-export function ChatList({ chats }: Props) {
-  return (
-    <Stack margin="8" spacing="4">
-      {chats.map((chat, i) => {
-        const isLast = i === chats.length;
-
-        switch (chat.type) {
-          case 'RobotQuestion': {
-            return <RobotQuestionChat className="mr-8" key={chat.id} question={chat.question} />;
-          }
-          case 'UserAnswer': {
-            return <UserAnswerChat className="ml-8" key={chat.id} answer={chat.answer} />;
-          }
-          case 'UserEatingSpeed': {
-            return <UserEatingSpeedChat className="ml-8" key={chat.id} value={chat.value} disabled={!isLast} />;
-          }
-          case 'UserFreeTextAnswer': {
-            return <UserFreeTextChat className="ml-8" key={chat.id} value={chat.value} disabled={!isLast} />;
-          }
-          case 'UserHealthMeatAnswer': {
-            return <UserHealthMeatChat className="ml-8" key={chat.id} value={chat.value} disabled={!isLast} />;
-          }
-          case 'UserHowManyPeopleAnswer': {
-            return <UserHowManyPeopleChat className="ml-8" key={chat.id} value={chat.value} disabled={!isLast} />;
-          }
-          case 'UserNiceRestaurantAnswer': {
-            return <UserNiceRestaurantChat className="ml-8" key={chat.id} value={chat.value} disabled={!isLast} />;
-          }
-          default:
-            throw new Error(`unknown chat type!`);
-        }
-      })}
-    </Stack>
-  );
-}
-
-export function ChatListWithState() {
+export function ChatList() {
   const [chats, setChats] = useState<Chat[]>([]);
 
   // TODO: あとで修正する
@@ -97,5 +57,41 @@ export function ChatListWithState() {
     );
   }, []);
 
-  return <ChatList chats={chats} />;
+  return (
+    <div className="relative p-8">
+      <Stack spacing="4">
+        {chats.map((chat, i) => {
+          const isLast = i === chats.length;
+          switch (chat.type) {
+            case 'RobotQuestion': {
+              return <RobotQuestionChat className="mr-8" key={chat.id} question={chat.question} />;
+            }
+            case 'UserAnswer': {
+              return <UserAnswerChat className="ml-8" key={chat.id} answer={chat.answer} />;
+            }
+            case 'UserEatingSpeed': {
+              return <UserEatingSpeedChat className="ml-8" key={chat.id} value={chat.value} disabled={!isLast} />;
+            }
+            case 'UserFreeTextAnswer': {
+              return <UserFreeTextChat className="ml-8" key={chat.id} value={chat.value} disabled={!isLast} />;
+            }
+            case 'UserHealthMeatAnswer': {
+              return <UserHealthMeatChat className="ml-8" key={chat.id} value={chat.value} disabled={!isLast} />;
+            }
+            case 'UserHowManyPeopleAnswer': {
+              return <UserHowManyPeopleChat className="ml-8" key={chat.id} value={chat.value} disabled={!isLast} />;
+            }
+            case 'UserNiceRestaurantAnswer': {
+              return <UserNiceRestaurantChat className="ml-8" key={chat.id} value={chat.value} disabled={!isLast} />;
+            }
+            default:
+              throw new Error(`unknown chat type!`);
+          }
+        })}
+      </Stack>
+      <Button className="absolute bottom-5 left-1/2 -translate-x-1/2" height={50}>
+        次の回答へ
+      </Button>
+    </div>
+  );
 }
