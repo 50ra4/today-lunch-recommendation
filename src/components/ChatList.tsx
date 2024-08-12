@@ -2,6 +2,7 @@ import { Button, Stack } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { nanoid } from 'nanoid';
 import { useState, useRef, useEffect } from 'react';
+import type { UseFormGetValues } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 
 import type { Chat } from '@/app/chat';
@@ -16,11 +17,155 @@ import { HEALTH_MEAT, HOW_MANY_PEOPLE, NICE_RESTAURANT, EATING_SPEED } from '@/c
 import type { QuestionFormInput } from '@/schemas/questionForm';
 import { questionFormSchema } from '@/schemas/questionForm';
 
+const useNextButton = (
+  getValues: UseFormGetValues<QuestionFormInput>,
+  setChats: (fn: (prev: Chat[]) => Chat[]) => void,
+  chat?: Chat,
+): { label: string; onClick: () => void } => {
+  if (!chat) {
+    return { label: '次へ', onClick: () => {} };
+  }
+
+  const label = '次の回答へ';
+  switch (chat.type) {
+    case 'RobotQuestion':
+    case 'UserAnswer': {
+      return { label, onClick: () => {} };
+    }
+    case 'UserEatingSpeed': {
+      return {
+        label,
+        onClick: () => {
+          setChats((prev) => {
+            const updated = prev.slice(0, prev.length - 1);
+            return [
+              ...updated,
+              { ...chat, value: getValues('eatingSpeed') },
+              {
+                id: nanoid(),
+                type: 'RobotQuestion',
+                question: 'お連れ様の人数は？',
+              },
+              {
+                id: nanoid(),
+                type: 'UserHowManyPeopleAnswer',
+                value: getValues('howManyPeople'),
+              },
+            ];
+          });
+        },
+      };
+    }
+    case 'UserHowManyPeopleAnswer': {
+      return {
+        label,
+        onClick: () => {
+          setChats((prev) => {
+            const updated = prev.slice(0, prev.length - 1);
+            return [
+              ...updated,
+              { ...chat, value: getValues('howManyPeople') },
+              {
+                id: nanoid(),
+                type: 'RobotQuestion',
+                question: 'ガッツリ食べたい気分ですか？',
+              },
+              {
+                id: nanoid(),
+                type: 'UserHealthMeatAnswer',
+                value: getValues('healthMeat'),
+              },
+            ];
+          });
+        },
+      };
+    }
+
+    case 'UserHealthMeatAnswer': {
+      return {
+        label,
+        onClick: () => {
+          setChats((prev) => {
+            const updated = prev.slice(0, prev.length - 1);
+            return [
+              ...updated,
+              { ...chat, value: getValues('healthMeat') },
+              {
+                id: nanoid(),
+                type: 'RobotQuestion',
+                question: 'おしゃれなレストランがいいですか？',
+              },
+              {
+                id: nanoid(),
+                type: 'UserNiceRestaurantAnswer',
+                value: getValues('niceRestaurant'),
+              },
+            ];
+          });
+        },
+      };
+    }
+
+    case 'UserNiceRestaurantAnswer': {
+      return {
+        label,
+        onClick: () => {
+          setChats((prev) => {
+            const updated = prev.slice(0, prev.length - 1);
+            return [
+              ...updated,
+              { ...chat, value: getValues('niceRestaurant') },
+              {
+                id: nanoid(),
+                type: 'RobotQuestion',
+                question: '食べたいものや好みのものを教えてください。',
+              },
+              {
+                id: nanoid(),
+                type: 'UserFreeTextAnswer',
+                value: getValues('freeText'),
+              },
+            ];
+          });
+        },
+      };
+    }
+
+    case 'UserFreeTextAnswer': {
+      return {
+        label,
+        onClick: () => {
+          setChats((prev) => {
+            const updated = prev.slice(0, prev.length - 1);
+            return [
+              ...updated,
+              { ...chat, value: getValues('freeText') },
+              {
+                id: nanoid(),
+                type: 'RobotQuestion',
+                question: 'FIXME:',
+              },
+              {
+                id: nanoid(),
+                type: 'UserHealthMeatAnswer',
+                value: getValues('healthMeat'),
+              },
+            ];
+          });
+        },
+      };
+    }
+
+    default:
+      throw new Error(`unknown chat type!`);
+  }
+};
+
 export function ChatList() {
   const [chats, setChats] = useState<Chat[]>([]);
 
   // TODO: あとで修正する
-  useForm<QuestionFormInput>({
+  const { getValues } = useForm<QuestionFormInput>({
     resolver: zodResolver(questionFormSchema),
     defaultValues: {
       healthMeat: HEALTH_MEAT.health,
@@ -30,6 +175,8 @@ export function ChatList() {
       freeText: '',
     },
   });
+
+  const button = useNextButton(getValues, setChats, chats.at(-1));
 
   const initialized = useRef(false);
   useEffect(() => {
@@ -89,8 +236,8 @@ export function ChatList() {
           }
         })}
       </Stack>
-      <Button className="absolute bottom-5 left-1/2 -translate-x-1/2" height={50}>
-        次の回答へ
+      <Button className="absolute bottom-5 left-1/2 -translate-x-1/2" height={50} onClick={() => button.onClick()}>
+        {button.label}
       </Button>
     </div>
   );
